@@ -17,7 +17,7 @@ trap 'rm -rf "$TMPDIR"' EXIT INT TERM
 echo "Temporary directory: $TMPDIR"
 
 echo "Checking for required programs..."
-command -v python >/dev/null 2>&1 || { echo "Error: python3 not found."; exit 1; }
+command -v python3 >/dev/null 2>&1 || { echo "Error: python3 not found."; exit 1; }
 command -v hw-probe >/dev/null 2>&1 || { echo "Error: hw-probe not found."; exit 1; }
 echo "All required programs are available."
 
@@ -32,7 +32,7 @@ done
 
 echo "Running script..."
 cd "$TMPDIR"
-python "$REPO_DIR/main.py" "$TMPDIR"
+python3 "$REPO_DIR/main.py" "$TMPDIR"
 
 MAKER=$(kenv | grep '^smbios.system.product=' | cut -d'=' -f2 | tr -d '"' | tr '[:upper:]' '[:lower:]' | sed 's/[^[:alnum:]]/_/g')
 if [ -z "$MAKER" ]; then
